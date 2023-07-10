@@ -43,17 +43,17 @@ const Orders = sequelize.define('orders', {
     status: {type: DataTypes.STRING},
     id_user: {type: DataTypes.INTEGER, references: {
         model: Users,
-        key: id
+        key: 'id'
     }},
     delivery: {type: DataTypes.BOOLEAN},
     address: {type: DataTypes.STRING},
     id_chef: {type: DataTypes.INTEGER, references: {
         model: Chefs,
-        key: id
+        key: 'id'
     }},
     id_couriers: {type: DataTypes.INTEGER, references: {
         model: Couriers,
-        key: id
+        key: 'id'
     }},
     order_time: {type: DataTypes.TIME},
     cost: {type: DataTypes.DOUBLE}
@@ -63,11 +63,11 @@ const ProductOrders = sequelize.define('productOrders', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     id_product: {type: DataTypes.INTEGER, references: {
         model: Products,
-        key: id
+        key: 'id'
     }},
     id_order: {type: DataTypes.INTEGER, references: {
         model: Orders,
-        key: id
+        key: 'id'
     }},
     count: {type: DataTypes.INTEGER}
 })
@@ -82,11 +82,11 @@ const IngredientProducts = sequelize.define('ingredientProducts', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     id_product: {type: DataTypes.INTEGER, references: {
         model: Products,
-        key: id
+        key: 'id'
     }},
     id_ingredient: {type: DataTypes.INTEGER, references: {
         model: Ingredients,
-        key: id
+        key: 'id'
     }}
 })
 
@@ -94,7 +94,7 @@ const Address = sequelize.define('address', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     id_user: {type: DataTypes.INTEGER, references: {
         model: Users,
-        key: id
+        key: 'id'
     }},
     address: {type: DataTypes.STRING},
     apartment_number: {type: DataTypes.STRING},
@@ -103,26 +103,26 @@ const Address = sequelize.define('address', {
     doorphone: {type: DataTypes.STRING}
 })
 
-Users.hasMany(Orders, {foreignKey: id_user})
-Orders.belongsTo(Users, {foreignKey: id_user})
+Users.hasMany(Orders, {foreignKey: 'id_user'})
+Orders.belongsTo(Users, {foreignKey: 'id_user'})
 
-Chefs.hasMany(Orders, {foreignKey: id_chef})
-Orders.belongsTo(Chefs, {foreignKey: id_chef})
+Chefs.hasMany(Orders, {foreignKey: 'id_chef'})
+Orders.belongsTo(Chefs, {foreignKey: 'id_chef'})
 
-Couriers.hasMany(Orders, {foreignKey: id_couriers})
-Orders.belongsTo(Couriers, {foreignKey: id_couriers})
+Couriers.hasMany(Orders, {foreignKey: 'id_couriers'})
+Orders.belongsTo(Couriers, {foreignKey: 'id_couriers'})
 
-Orders.hasMany(ProductOrders, {foreignKey: id_order})
-ProductOrders.belongsTo(Orders, {foreignKey: id_order})
+Orders.hasMany(ProductOrders, {foreignKey: 'id_order'})
+ProductOrders.belongsTo(Orders, {foreignKey: 'id_order'})
 
-Products.hasMany(ProductOrders, {foreignKey: id_product})
-ProductOrders.belongsTo(Products, {foreignKey: id_product})
+Products.hasMany(ProductOrders, {foreignKey: 'id_product'})
+ProductOrders.belongsTo(Products, {foreignKey: 'id_product'})
 
-Products.hasMany(IngredientProducts, {foreignKey: id_product})
-IngredientProducts.belongsTo(Products, {foreignKey: id_product})
+Products.hasMany(IngredientProducts, {foreignKey: 'id_product'})
+IngredientProducts.belongsTo(Products, {foreignKey: 'id_product'})
 
-Ingredients.hasMany(IngredientProducts, {foreignKey: id_ingredient})
-IngredientProducts.belongsTo(Ingredients, {foreignKey: id_ingredient})
+Ingredients.hasMany(IngredientProducts, {foreignKey: 'id_ingredient'})
+IngredientProducts.belongsTo(Ingredients, {foreignKey: 'id_ingredient'})
 
 module.exports = {
     Users, Promotions, Products, Chefs, Couriers, Orders, ProductOrders, Ingredients, IngredientProducts, Address
