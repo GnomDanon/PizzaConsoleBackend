@@ -10,4 +10,4 @@ build:
 run:
   command: npm run dev
   persistenceMount: /data
-  containerPort: 5000
+  containerPort: 80
