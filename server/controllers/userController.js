@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {User, Basket} = require('../models/models')
+const {Users} = require('../models/models')
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
@@ -11,23 +11,39 @@ const generateJwt = (id, email, role) => {
     )
 }
 
+
 class UserController {
+    async registration(req, res, next) {
+      const {first_name, surname, middle_surname, phone, email, password} = req.body
+      if (!email || !password) {
+          return next(ApiError.badRequest('Некорректный email или password'))
+      }
+      const candidate = await Users.findOne({where: {email}})
+      if (candidate) {
+          return next(ApiError.badRequest('Пользователь с таким email уже существует'))
+      }
+      const hashPassword = await bcrypt.hash(password, 5)
+      const user = await Users.create({first_name, surname, middle_surname, phone, email, hashed_password: hashPassword})
+      const token = generateJwt(user.id, user.email)
+      return res.json({token})
+}
+
     async login(req, res, next) {
         const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
+        const user = await Users.findOne({where: {email}})
         if (!user) {
             return next(ApiError.internal('Пользователь не найден'))
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
+        let comparePassword = bcrypt.compareSync(password, user.hashed_password)
         if (!comparePassword) {
             return next(ApiError.internal('Указан неверный пароль'))
         }
-        const token = generateJwt(user.id, user.email, user.role)
+        const token = generateJwt(user.id, user.email)
         return res.json({token})
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.role)
+        const token = generateJwt(req.user.id, req.user.email)
         return res.json({token})
     }
 }

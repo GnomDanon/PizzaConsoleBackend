@@ -1,16 +1,14 @@
 const sequelize = require('../db')
 const {DataTypes, SequelizeScopeError} = require('sequelize')
 
-const Users = sequelize.define('users', {
+const Users = sequelize.define('consoleUsers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     phone: {type: DataTypes.STRING, unique: true},
-    hashed_password: {type: DataTypes.BLOB},
+    hashed_password: {type: DataTypes.STRING},
     surname: {type: DataTypes.STRING},
     first_name: {type: DataTypes.STRING},
     middle_surname: {type: DataTypes.STRING},
-    email: {type: DataTypes.STRING, unique: true},
-    bonus: {type: DataTypes.INTEGER},
-    role: {type: DataTypes.STRING}
+    email: {type: DataTypes.STRING, unique: true}
 })
 
 const Promotions = sequelize.define('promotions', {
