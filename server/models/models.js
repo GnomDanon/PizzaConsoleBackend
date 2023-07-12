@@ -1,7 +1,7 @@
 const sequelize = require('../db')
 const {DataTypes, SequelizeScopeError} = require('sequelize')
 
-const Users = sequelize.define('consoleUsers', {
+const ConsoleUsers = sequelize.define('consoleUsers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     phone: {type: DataTypes.STRING, unique: true},
     hashed_password: {type: DataTypes.STRING},
@@ -40,7 +40,7 @@ const Orders = sequelize.define('orders', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     status: {type: DataTypes.STRING},
     id_user: {type: DataTypes.INTEGER, references: {
-        model: Users,
+        model: ConsoleUsers,
         key: 'id'
     }},
     delivery: {type: DataTypes.BOOLEAN},
@@ -91,7 +91,7 @@ const IngredientProducts = sequelize.define('ingredientProducts', {
 const Address = sequelize.define('address', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     id_user: {type: DataTypes.INTEGER, references: {
-        model: Users,
+        model: ConsoleUsers,
         key: 'id'
     }},
     address: {type: DataTypes.STRING},
@@ -101,8 +101,8 @@ const Address = sequelize.define('address', {
     doorphone: {type: DataTypes.STRING}
 })
 
-Users.hasMany(Orders, {foreignKey: 'id_user'})
-Orders.belongsTo(Users, {foreignKey: 'id_user'})
+ConsoleUsers.hasMany(Orders, {foreignKey: 'id_user'})
+Orders.belongsTo(ConsoleUsers, {foreignKey: 'id_user'})
 
 Chefs.hasMany(Orders, {foreignKey: 'id_chef'})
 Orders.belongsTo(Chefs, {foreignKey: 'id_chef'})
@@ -123,5 +123,5 @@ Ingredients.hasMany(IngredientProducts, {foreignKey: 'id_ingredient'})
 IngredientProducts.belongsTo(Ingredients, {foreignKey: 'id_ingredient'})
 
 module.exports = {
-    Users, Promotions, Products, Chefs, Couriers, Orders, ProductOrders, Ingredients, IngredientProducts, Address
+    ConsoleUsers, Promotions, Products, Chefs, Couriers, Orders, ProductOrders, Ingredients, IngredientProducts, Address
 }
