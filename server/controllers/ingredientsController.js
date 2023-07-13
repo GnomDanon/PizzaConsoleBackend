@@ -42,6 +42,21 @@ class IngredientsController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async checkAllIngredientsCount(req, res, next){
+        try {
+            const ingredients = await Ingredients.findAll()
+            let alerts = Array()
+            ingredients.forEach(el => {
+                if(el.count < el.minimum_count) {
+                    alerts += el.id + [' ']
+                }
+                });
+            return res.json({alerts})
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
 }
 
 module.exports = new IngredientsController()

@@ -10,4 +10,6 @@ router.put('/changeIngredientCountByID', ingredientsController.changeById)
 
 router.put('/changeMininmumCountByID', ingredientsController.changeMininmumCountByID)
 
+router.get('/checkAllIngredientsCount', ingredientsController.checkAllIngredientsCount)
+
 module.exports = router
