@@ -25,7 +25,7 @@ class IngredientsController {
         try {
             const {delta_count, id} = req.body
             const ingredient = await Ingredients.findOne({where: {id: id}})
-            let new_count = ingredient['count'] + delta_count
+            let new_count = ingredient['count'] + parseFloat(delta_count)
             const updated = await Ingredients.update({count: new_count}, {where: {id: id}})
             return res.json(updated)
         } catch (e) {
