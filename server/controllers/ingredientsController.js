@@ -5,7 +5,7 @@ class IngredientsController {
     async createIngredient(req, res, next) {
         try {
             const {title, count} = req.body
-            const ingredient = Ingredients.create({title, count})
+            const ingredient = await Ingredients.create({title, count})
             return res.json(ingredient)
         } catch (e) {
             next(ApiError.badRequest(e.message))

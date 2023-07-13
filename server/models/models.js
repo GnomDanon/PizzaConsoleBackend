@@ -89,7 +89,8 @@ const IngredientProducts = sequelize.define('ingredientProducts', {
     id_ingredient: {type: DataTypes.INTEGER, references: {
         model: Ingredients,
         key: 'id'
-    }}
+    }},
+    count: {type: DataTypes.DOUBLE}
 })
 
 const Address = sequelize.define('address', {

@@ -5,7 +5,7 @@ class ProductOrdersController {
     async getAllProductOrdersByOrderID(req, res, next) {
         try {
             const {id_order} = req.body
-            const productOrders = ProductOrders.findAll({where: {id_order: id_order}})
+            const productOrders = await ProductOrders.findAll({where: {id_order: id_order}})
             return res.json(productOrders)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -15,7 +15,7 @@ class ProductOrdersController {
     async getOneProductOrderByOrderIDAndProductID(req, res, next) {
         try {
             const {id_order, id_product} = req.body
-            const productOrder = ProductOrders.findOne({where: {id_order: id_order, id_product: id_product}})
+            const productOrder = await ProductOrders.findOne({where: {id_order: id_order, id_product: id_product}})
             return res.json(productOrder)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -25,7 +25,7 @@ class ProductOrdersController {
     async deleteOrderProductByOrderIDAndProductID(req, res, next) {
         try {
             const {id_order, id_product} = req.body
-            const deleted = ProductOrders.destroy({where: {id_order: id_order, id_product: id_product}})
+            const deleted = await ProductOrders.destroy({where: {id_order: id_order, id_product: id_product}})
             return res.json(deleted)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -35,7 +35,7 @@ class ProductOrdersController {
     async deleteOrderProductByOrderID(req, res, next) {
         try {
             const {id_order} = req.body
-            const deleted = ProductOrders.describe({where: {id_order: id_order}})
+            const deleted = await ProductOrders.describe({where: {id_order: id_order}})
             return res.json(deleted)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -45,7 +45,7 @@ class ProductOrdersController {
     async changeCountByOrderIDAndProductID(req, res, next) {
         try {
             const {id_order, id_product, count} = req.body
-            const updated = ProductOrders.update({count: count}, {where: {id_order: id_order, id_product: id_product}})
+            const updated = await ProductOrders.update({count: count}, {where: {id_order: id_order, id_product: id_product}})
             return res.json(updated)
         } catch (e) {
             next(ApiError.badRequest(e.message))
