@@ -4,7 +4,7 @@ const {Orders} = require('../models/models')
 class OrdersController {
     async getAllOrders(req, res, next) {
         try {
-            const orders = Orders.findAll()
+            const orders = await Orders.findAll()
             return res.json(orders)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -14,7 +14,7 @@ class OrdersController {
     async getOneOrderByID(req, res, next) {
         try {
             const {id} = req.body
-            const order = Orders.findOne({where: {id: id}})
+            const order = await Orders.findOne({where: {id: id}})
             return res.json(order)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -24,7 +24,7 @@ class OrdersController {
     async changeStatusByID(req, res, next) {
         try {
             const {id, status} = req.body
-            const updated = Orders.update({status: status}, {where: {id: id}})
+            const updated = await Orders.update({status: status}, {where: {id: id}})
             return res.json(updated)
         } catch (e) {
             next(ApiError.badRequest(e.message))
