@@ -4,7 +4,6 @@ const ordersController = require('../controllers/ordersController')
 
 router.get('/getAllOrders', ordersController.getAllOrders)
 router.post('/getOneOrderByID', ordersController.getOneOrderByID)
-
 router.put('/changeStatucByID', ordersController.changeStatusByID)
 
 module.exports = router

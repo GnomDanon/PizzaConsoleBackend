@@ -7,7 +7,7 @@ class OrdersController {
             const orders = await Orders.findAll()
             return res.json(orders)
         } catch (e) {
-            next(ApiError.badRequest(e.message))
+            next(ApiError.badRequest(e.message)) 
         }
     }
 
