@@ -4,8 +4,8 @@ const {Ingredients} = require('../models/models')
 class IngredientsController {
     async createIngredient(req, res, next) {
         try {
-            const {title, count} = req.body
-            const ingredient = Ingredients.create({title, count})
+            const {title, count, minimum_count} = req.body
+            const ingredient = Ingredients.create({title, count, minimum_count})
             return res.json(ingredient)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -57,6 +57,8 @@ class IngredientsController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+
 }
 
 module.exports = new IngredientsController()
