@@ -8,4 +8,6 @@ router.get('/getIngredients', ingredientsController.getIngredients)
 
 router.put('/changeIngredientCountByID', ingredientsController.changeById)
 
+router.put('/changeMininmumCountByID', ingredientsController.changeMininmumCountByID)
+
 module.exports = router

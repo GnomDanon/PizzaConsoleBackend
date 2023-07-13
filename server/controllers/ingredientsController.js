@@ -32,6 +32,16 @@ class IngredientsController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async changeMininmumCountByID(req, res, next){
+        try {
+            const {id, minimum_count} = req.body
+            const updated = await Ingredients.update({minimum_count}, {where: {id}})
+            return res.json({updated})
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
 }
 
 module.exports = new IngredientsController()

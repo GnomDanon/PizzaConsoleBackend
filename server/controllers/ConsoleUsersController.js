@@ -15,7 +15,7 @@ const generateJwt = (id, email, role) => {
 class ConsoleUsersController {
     async registration(req, res, next) {
         try {
-            const {first_name, surname, middle_surname, phone, email, password} = req.body
+            const {first_name, surname, middle_surname, phone, email, password, salary} = req.body
             if (!email || !password) {
                 return next(ApiError.badRequest('Некорректный email или password'))
             }
@@ -24,7 +24,7 @@ class ConsoleUsersController {
                 return next(ApiError.badRequest('Пользователь с таким email уже существует'))
             }
             const hashPassword = await bcrypt.hash(password, 5)
-            const user = await ConsoleUsers.create({first_name, surname, middle_surname, phone, email, hashed_password: hashPassword})
+            const user = await ConsoleUsers.create({first_name, surname, middle_surname, phone, email, hashed_password: hashPassword, salary})
             const token = generateJwt(user.id, user.email)
             return res.json({token})
         } catch (e) {
@@ -124,7 +124,17 @@ class ConsoleUsersController {
     async changeEmailByPhone(req, res, next){
         try {
             const {phone, newEmail} = req.body
-            const user = await ConsoleUsers.update({email:newEmail}, {where: {phone:phone}})
+            const user = await ConsoleUsers.update({email:newEmail}, {where: {phone}})
+            return res.json({user})
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async changeSalary(req, res, next){
+        try {
+            const {id, salary} = req.body
+            const user = await ConsoleUsers.update({salary}, {where: {id}})
             return res.json({user})
         } catch (e) {
             next(ApiError.badRequest(e.message))

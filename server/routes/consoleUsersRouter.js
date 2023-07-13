@@ -12,5 +12,6 @@ router.get('/getByEmail', consoleUsersController.getByEmail)
 router.get('/getAll', consoleUsersController.getAll)
 router.put('/changePhoneByPhone', consoleUsersController.changePhoneByPhone)
 router.put('/changeEmailByPhone', consoleUsersController.changeEmailByPhone)
+router.put('/changeSalary', consoleUsersController.changeSalary)
 
 module.exports = router
