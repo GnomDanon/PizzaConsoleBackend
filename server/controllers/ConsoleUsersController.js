@@ -102,6 +102,15 @@ class ConsoleUsersController {
         }
     }
 
+    async getAll(req, res, next) {
+        try {
+            const users = await ConsoleUsers.findAll()
+            return res.json(users)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
     async changePhoneByPhone(req, res, next){
         try {
             const {oldPhone, newPhone} = req.body

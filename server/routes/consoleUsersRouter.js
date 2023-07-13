@@ -9,6 +9,7 @@ router.get('/auth', authMiddleware, consoleUsersController.check)
 router.get('/getByID', consoleUsersController.getByID)
 router.get('/getByPhone', consoleUsersController.getByPhone)
 router.get('/getByEmail', consoleUsersController.getByEmail)
+router.get('/getAll', consoleUsersController.getAll)
 router.put('/changePhoneByPhone', consoleUsersController.changePhoneByPhone)
 router.put('/changeEmailByPhone', consoleUsersController.changeEmailByPhone)
 
