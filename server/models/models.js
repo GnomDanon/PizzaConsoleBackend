@@ -27,13 +27,15 @@ const Products = sequelize.define('products', {
 const Chefs = sequelize.define('chefs', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     first_name: {type: DataTypes.STRING},
-    salary: {type: DataTypes.DOUBLE}
+    salary: {type: DataTypes.DOUBLE},
+    surname: {type: DataTypes.STRING}
 })
 
 const Couriers = sequelize.define('couriers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     first_name: {type: DataTypes.STRING},
-    salary: {type: DataTypes.DOUBLE}
+    salary: {type: DataTypes.DOUBLE},
+    surname: {type: DataTypes.STRING}
 })
 
 const Orders = sequelize.define('orders', {
