@@ -43,7 +43,6 @@ class OrdersController {
         try {
             const {id, status} = req.body
             const updated = await Orders.update({status: status}, {where: {id: id}})
-<<<<<<< HEAD
             const ingredients = await Ingredients.findAll()
             ingredients.forEach(ingredient => {
                 dictionary[ingredient['id']] = ingredient['count']
@@ -54,8 +53,6 @@ class OrdersController {
                     processProductOrder(productOrder)
                 })
             }
-=======
->>>>>>> 9b8d8cdc9c2aee5c022ccf072e693f9d24fefba0
             return res.json(updated)
         } catch (e) {
             next(ApiError.badRequest(e.message))

@@ -4,13 +4,8 @@ const {Ingredients} = require('../models/models')
 class IngredientsController {
     async createIngredient(req, res, next) {
         try {
-<<<<<<< HEAD
-            const {title, count} = req.body
-            const ingredient = await Ingredients.create({title, count})
-=======
             const {title, count, minimum_count} = req.body
             const ingredient = Ingredients.create({title, count, minimum_count})
->>>>>>> 9b8d8cdc9c2aee5c022ccf072e693f9d24fefba0
             return res.json(ingredient)
         } catch (e) {
             next(ApiError.badRequest(e.message))
