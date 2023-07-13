@@ -56,8 +56,8 @@ const Orders = sequelize.define('orders', {
         model: Couriers,
         key: 'id'
     }},
-    order_time: {type: DataTypes.TIME},
-    cost: {type: DataTypes.DOUBLE}
+    created_at: {type: DataTypes.TIME},
+    cost: {type: DataTypes.DOUBLE} 
 })
 
 const ProductOrders = sequelize.define('productOrders', {
