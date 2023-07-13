@@ -8,7 +8,8 @@ const ConsoleUsers = sequelize.define('consoleUsers', {
     surname: {type: DataTypes.STRING},
     first_name: {type: DataTypes.STRING},
     middle_surname: {type: DataTypes.STRING},
-    email: {type: DataTypes.STRING, unique: true}
+    email: {type: DataTypes.STRING, unique: true},
+    salary: {type: DataTypes.DOUBLE}
 })
 
 const Promotions = sequelize.define('promotions', {
@@ -75,7 +76,8 @@ const ProductOrders = sequelize.define('productOrders', {
 const Ingredients = sequelize.define('ingredients', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING},
-    count: {type: DataTypes.DOUBLE}
+    count: {type: DataTypes.DOUBLE},
+    minimum_count: {type: DataTypes.DOUBLE}
 })
 
 const IngredientProducts = sequelize.define('ingredientProducts', {
